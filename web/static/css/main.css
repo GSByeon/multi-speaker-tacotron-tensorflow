@@ -1,0 +1,60 @@
+@media screen and (min-width: 1452px) {
+    .container {
+        max-width: 1152px;
+        width: 1152px;
+    }
+}
+@media screen and (min-width: 1260px) {
+    .container {
+        max-width: 960px;
+        width: 960px;
+    }
+}
+@media screen and (min-width: 1068px) {
+    .container {
+        max-width: 768px;
+        width: 768px;
+    }
+}
+
+.container {
+    margin: 0 auto;
+    position: relative;
+}
+
+#wave {
+    height: 100px;
+}
+
+#waveform {
+    display: none;
+}
+
+#nav {
+      position: fixed !important;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+}
+
+.card {
+      padding: 0;
+}
+
+.columns {
+    margin-left: 0rem;
+    margin-right: 0rem;
+    margin-top: 0rem;
+}
+
+#text {
+    font-size: 1.2em;
+    padding: 0.7em 1em 0.7em 1em;
+    background: transparent;
+    color: white;
+}
+
+.dark {
+    background-color: black;
+}

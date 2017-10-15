@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>D.Voice</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://wavesurfer-js.org/dist/wavesurfer.min.js"></script>
+
+    <script src="{{ url_for('static', filename='js/siriwave.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </head>
+  <body class="layout-default">
+
+    <section class="hero is-fullheight dark">
+      <div class="hero-body">
+        <div class="container">
+          <div class="section-body" onKeyPress="return checkSubmit(event)">
+            <div class="field">
+              <div class="control">
+                <div class="columns">
+                  <div class="column"></div>
+                  <div class="column">
+                    <div id="wave"></div>
+                  </div>
+                  <div class="column"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control">
+                <div id="waveform"></div>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control has-text-centered">
+                <label class="radio">
+                  <input type="radio" name="id" value="0" port="5000" checked>
+                  Speaker 1
+                </label>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control has-icons-right">
+                <textarea class="textarea" id="text" placeholder="{{ text }} "></textarea>
+                <span class="icon is-small is-right" id="text-warning-icon" style="display:none">
+                  <i class="fa fa-warning"></i>
+                </span>
+              </div>
+              <p class="help is-danger" id="text-warning" style="display:none">
+                Wrong sentence
+              </p>
+            </div>
+
+            <div class="field has-text-centered">
+              <button class="button is-white" id="synthesize">
+                Synthesize
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
