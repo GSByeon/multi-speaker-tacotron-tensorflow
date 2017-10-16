@@ -27,7 +27,7 @@ D.Voice는 TensorFlow로 구현된 오픈소스 딥러닝 음성 합성 엔진�
 
     pip3 install -r requirements.txt
 
-바로 음성을 만들고 싶으면 [2-3. 학습된 모델 다운받기](#2-4-미리-학습된-모델-다운받기)를 따라하시면 됩니다.
+바로 음성을 만들고 싶으면 [2-3. 학습된 모델 다운받기](#2-3-미리-학습된-모델-다운받기)를 따라하시면 됩니다.
 
 
 ### 2-1. 학습할 데이터 준비하기
@@ -92,11 +92,11 @@ D.Voice는 TensorFlow로 구현된 오픈소스 딥러닝 음성 합성 엔진�
 
        python -m audio.silence --audio_pattern "./datasets/son/audio/*.wav" --method=pydub
 
-3. 작게 분리된 음성들을 [Google Speech Recognition API](https://cloud.google.com/speech/)를 사용해 대략적인 문장들을 예측합니다.
+3. 작게 분리된 음성들을 [Google Speech Recognition API](https://cloud.google.com/speech/)를 사용해 대략적인 문장들을 예측합니다. (`moon`과 `park` 데이터셋은 `recognition.json`이 이미 있기 때문에 이 과정은 생략하셔도 됩니다.) 
 
        python -m recognition.google --audio_pattern "./datasets/son/audio/*.*.wav"
 
-4. 기존의 텍스트와 음성 인식으로 예측된 텍스트를 비교해 `음성<->텍스트` 쌍 정보를 `./datasets/son/alignment.json`에 저장합니다. (`moon`과 `park` 데이터셋은 `recognition.json`이 이미 있기 때문에 이 과정은 생략하셔도 됩니다.) 
+4. 기존의 텍스트와 음성 인식으로 예측된 텍스트를 비교해 `음성<->텍스트` 쌍 정보를 `./datasets/son/alignment.json`에 저장합니다.
 
        python -m recognition.alignment --recognition_path "./datasets/son/recognition.json" --score_threshold=0.5
 
@@ -108,7 +108,7 @@ D.Voice는 TensorFlow로 구현된 오픈소스 딥러닝 음성 합성 엔진�
 자동화 과정이 굉장히 간단하기 때문에, 데이터에 노이즈가 많이 존재합니다. 하지만 오디오와 텍스트가 충분히 많이 있다면 (처음부터 학습시 20시간 이상, 미리 학습된 모델에서 학습시 5+시간 이상) 적당한 퀄리티의 음성 합성을 기대할 수 있습니다.
 
 
-### 2-4. 미리 학습된 모델 다운받기
+### 2-3. 미리 학습된 모델 다운받기
 
 미리 학습된 모델들을 사용해 음성을 만들거나 모델을 학습시킬 수 있습니다. 아래 모델 중 하나를 다운로드 받으시고:
 
