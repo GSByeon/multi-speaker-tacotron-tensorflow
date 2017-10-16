@@ -90,7 +90,7 @@ def search_optimal(found_text, recognition_text):
     return optimal
 
 
-def align_text(
+def align_text_fn(
         item, score_threshold, debug=False):
 
     audio_path, recognition_text = item
@@ -136,7 +136,7 @@ def align_text(
     return result
 
 def align_text_batch(config):
-    align_text = partial(align_text,
+    align_text = partial(align_text_fn,
             score_threshold=config.score_threshold)
 
     results = {}
