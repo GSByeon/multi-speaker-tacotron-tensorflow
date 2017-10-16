@@ -20,7 +20,6 @@ puncuation_table = str.maketrans({key: None for key in string.punctuation})
 def remove_puncuations(text):
     return text.translate(puncuation_table)
 
-
 def text_to_sequence(text, as_token=False):
     cleaner_names = [x.strip() for x in hparams.cleaners.split(',')]
     return _text_to_sequence(text, cleaner_names, as_token)

@@ -123,8 +123,8 @@ You can download a pre-trained models or generate audio. Available models are:
 
 After you donwload pre-trained models, you can generate voices as follows:
 
-    python3 synthesizer.py --load_path logs/son-20171015 --text "이거 실화냐?"
-    python3 synthesizer.py --load_path logs/park-20171015 --text "이거 실화냐?"
+    python3 synthesizer.py --load_path logs/son-20171015 --text "Is this real?"
+    python3 synthesizer.py --load_path logs/park-20171015 --text "Is this real?"
 
 **WARNING: The two pre-trained models are being made available for research purpose only.**
 
@@ -132,6 +132,8 @@ After you donwload pre-trained models, you can generate voices as follows:
 ### 3. Train a model
 
 The important hyperparameters for a models are defined in `hparams.py`.
+
+(**Change `cleaners` in `hparams.py` from `korean_cleaners` to `english_cleaners` to train with English dataset**)
 
 To train a single-speaker model:
 
