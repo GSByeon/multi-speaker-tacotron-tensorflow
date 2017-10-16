@@ -96,13 +96,13 @@ D.Voice는 TensorFlow로 구현된 오픈소스 딥러닝 음성 합성 엔진�
 
        python -m recognition.google --audio_pattern "./datasets/son/audio/*.*.wav"
 
-4. 기존의 텍스트와 음성 인식으로 예측된 텍스트를 비교해 `음성<->텍스트` 쌍 정보를 `./datasets/son/alignment.json`에 저장합니다. (`moon`과 `park` 데이터셋은 `alignment.json`이 이미 있기 때문에 이 과정은 생략하셔도 됩니다.) 
+4. 기존의 텍스트와 음성 인식으로 예측된 텍스트를 비교해 `음성<->텍스트` 쌍 정보를 `./datasets/son/alignment.json`에 저장합니다. (`moon`과 `park` 데이터셋은 `recognition.json`이 이미 있기 때문에 이 과정은 생략하셔도 됩니다.) 
 
        python -m recognition.alignment --recognition_path "./datasets/son/recognition.json" --score_threshold=0.5
 
 5. 마지막으로 학습에 사용될 numpy 파일들을 만듭니다.
 
-       python3 -m datasets.synthesizer_data ./datasets/son/alignment.json
+       python3 -m datasets.generate_data ./datasets/son/alignment.json
 
 
 자동화 과정이 굉장히 간단하기 때문에, 데이터에 노이즈가 많이 존재합니다. 하지만 오디오와 텍스트가 충분히 많이 있다면 (처음부터 학습시 20시간 이상, 미리 학습된 모델에서 학습시 5+시간 이상) 적당한 퀄리티의 음성 합성을 기대할 수 있습니다.

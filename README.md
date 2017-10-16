@@ -92,7 +92,7 @@ Each script execute below commands. (explain with `son` dataset)
 
        python -m audio.silence --audio_pattern "./datasets/son/audio/*.wav" --method=pydub
 
-3. By using [Google Speech Recognition API](https://cloud.google.com/speech/), we predict sentences for all segmented audios. (this is optional for `moon` and `park` because they already have `alignment.json`)
+3. By using [Google Speech Recognition API](https://cloud.google.com/speech/), we predict sentences for all segmented audios. (this is optional for `moon` and `park` because they already have `recognition.json`)
 
        python -m recognition.google --audio_pattern "./datasets/son/audio/*.*.wav"
 
@@ -102,7 +102,7 @@ Each script execute below commands. (explain with `son` dataset)
 
 5. Finally, generated numpy files which will be used in training.
 
-       python3 -m datasets.synthesizer_data ./datasets/son/alignment.json
+       python3 -m datasets.generate_data ./datasets/son/alignment.json
 
 Because the automatic generation is extremely naive, the dataset is noisy. However, if you have enough datasets (20+ hours with random initialization or 5+ hours with pretrained model initialization), you can expect an acceptable quality of audio synthesis.
 
