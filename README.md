@@ -16,6 +16,7 @@ Samples audios (in Korean) can be found [here](http://carpedm20.github.io/tacotr
 ## Prerequisites
 
 - Python 3.6+
+- FFmpeg
 - [Tensorflow 1.3](https://www.tensorflow.org/install/)
 
 
@@ -26,6 +27,7 @@ Samples audios (in Korean) can be found [here](http://carpedm20.github.io/tacotr
 After preparing [Tensorflow](https://www.tensorflow.org/install/), install prerequisites with:
 
     pip3 install -r requirements.txt
+    python -c "import nltk; nltk.download('punkt')"
 
 If you want to synthesize a speech in Korean dicrectly, follow [2-3. Download pre-trained models](#2-3-download-pre-trained-models).
 
@@ -60,7 +62,7 @@ and `YOUR_DATASET/alignment.json` should look like:
 
 After you prepare as described, you should genearte preprocessed data with:
 
-    python -m datasets.generate_data ./datasets/YOUR_DATASET/alignment.json
+    python3 -m datasets.generate_data ./datasets/YOUR_DATASET/alignment.json
 
 
 ### 2-2. Generate Korean datasets
@@ -86,19 +88,19 @@ Each script execute below commands. (explain with `son` dataset)
 
 1. Download speech(or video) and text.
 
-       python -m datasets.son.download
+       python3 -m datasets.son.download
 
 2. Segment all audios on silence.
 
-       python -m audio.silence --audio_pattern "./datasets/son/audio/*.wav" --method=pydub
+       python3 -m audio.silence --audio_pattern "./datasets/son/audio/*.wav" --method=pydub
 
 3. By using [Google Speech Recognition API](https://cloud.google.com/speech/), we predict sentences for all segmented audios. (this is optional for `moon` and `park` because they already have `recognition.json`)
 
-       python -m recognition.google --audio_pattern "./datasets/son/audio/*.*.wav"
+       python3 -m recognition.google --audio_pattern "./datasets/son/audio/*.*.wav"
 
 4. By comparing original text and recognised text, save `audio<->text` pair information into `./datasets/son/alignment.json`.
 
-       python -m recognition.alignment --recognition_path "./datasets/son/recognition.json" --score_threshold=0.5
+       python3 -m recognition.alignment --recognition_path "./datasets/son/recognition.json" --score_threshold=0.5
 
 5. Finally, generated numpy files which will be used in training.
 
@@ -121,22 +123,31 @@ You can download a pre-trained models or generate audio. Available models are:
 
 After you donwload pre-trained models, you can generate voices as follows:
 
-    python3 synthesizer.py --load_path logs/son-20171015 --text "이거 실화냐?"
-    python3 synthesizer.py --load_path logs/park-20171015 --text "이거 실화냐?"
+    python3 synthesizer.py --load_path logs/son-20171015 --text "Is this real?"
+    python3 synthesizer.py --load_path logs/park-20171015 --text "Is this real?"
 
 **WARNING: The two pre-trained models are being made available for research purpose only.**
 
 
 ### 3. Train a model
 
+The important hyperparameters for a models are defined in `hparams.py`.
+
+(**Change `cleaners` in `hparams.py` from `korean_cleaners` to `english_cleaners` to train with English dataset**)
+
 To train a single-speaker model:
 
-    python train.py --data_path=datasets/jtbc
-    python train.py --data_path=datasets/park --initialize_path=PATH_TO_CHECKPOINT
+    python3 train.py --data_path=datasets/jtbc
+    python3 train.py --data_path=datasets/park --initialize_path=PATH_TO_CHECKPOINT
 
 To train a multi-speaker model:
 
-    python train.py --data_path=datasets/jtbc,datasets/park
+    # after change `model_type` in `hparams.py` to `deepvoice` or `simple`
+    python3 train.py --data_path=datasets/jtbc,datasets/park
+
+To restart a training from previous experiments such as `logs/son-20171015`:
+
+    python3 train.py --data_path=datasets/son --load_path logs/son-20171015
 
 If you don't have good and enough (10+ hours) dataset, it would be better to use `--initialize_path` to use a well-trained model as initial parameters.
 

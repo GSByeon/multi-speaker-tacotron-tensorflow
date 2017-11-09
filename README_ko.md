@@ -16,6 +16,7 @@ D.Voice는 TensorFlow로 구현된 오픈소스 딥러닝 음성 합성 엔진�
 ## Prerequisites
 
 - Python 3.6+
+- FFmpeg
 - [Tensorflow 1.3](https://www.tensorflow.org/install/)
 
 
@@ -26,6 +27,7 @@ D.Voice는 TensorFlow로 구현된 오픈소스 딥러닝 음성 합성 엔진�
 [Tensorflow 1.3](https://www.tensorflow.org/install/)를 설치한 후, 아래 명령어로 필수 라이브러리를 설치합니다.
 
     pip3 install -r requirements.txt
+    python -c "import nltk; nltk.download('punkt')"
 
 바로 음성을 만들고 싶으면 [2-3. 학습된 모델 다운받기](#2-3-미리-학습된-모델-다운받기)를 따라하시면 됩니다.
 
@@ -130,6 +132,8 @@ D.Voice는 TensorFlow로 구현된 오픈소스 딥러닝 음성 합성 엔진�
 
 ### 3. 모델 학습하기
 
+모델의 중요 파라미터는 `hparams.py`에 있습니다.
+
 단일 화자 모델을 학습하려면:
 
     python3 train.py --data_path=datasets/son
@@ -137,7 +141,12 @@ D.Voice는 TensorFlow로 구현된 오픈소스 딥러닝 음성 합성 엔진�
 
 다중 화자 모델을 학습하려면:
 
+    # `hparams.py`에서 `model_type`을 `deepvoice` 혹은 `simple`로 바꾼 후
     python3 train.py --data_path=datasets/son,datasets/park
+
+학습 중이던 모델(ex. `logs/son-20171015`)을 다시 학습하려면:
+
+    python3 train.py --data_path=datasets/son --load_path logs/son-20171015
 
 학습 데이터가 좋지 않다면 `--initialize_path`로 이미 학습된 모델의 파라미터로 초기화 해서 학습하시는 것이 좋습니다.
 

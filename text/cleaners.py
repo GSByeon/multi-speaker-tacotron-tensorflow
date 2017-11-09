@@ -1,3 +1,4 @@
+# Code based on https://github.com/keithito/tacotron/blob/master/text/cleaners.py
 '''
 Cleaners are transformations that run over the input text at both training and eval time.
 
@@ -78,3 +79,13 @@ def transliteration_cleaners(text):
     text = lowercase(text)
     text = collapse_whitespace(text)
     return text
+
+
+def english_cleaners(text):
+  '''Pipeline for English text, including number and abbreviation expansion.'''
+  text = convert_to_ascii(text)
+  text = lowercase(text)
+  text = expand_numbers(text)
+  text = expand_abbreviations(text)
+  text = collapse_whitespace(text)
+  return text

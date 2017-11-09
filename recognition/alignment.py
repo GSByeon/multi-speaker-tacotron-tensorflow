@@ -90,7 +90,7 @@ def search_optimal(found_text, recognition_text):
     return optimal
 
 
-def align_text_for_jtbc(
+def align_text_fn(
         item, score_threshold, debug=False):
 
     audio_path, recognition_text = item
@@ -136,12 +136,8 @@ def align_text_for_jtbc(
     return result
 
 def align_text_batch(config):
-    if "jtbc" in config.recognition_path.lower():
-        align_text = partial(align_text_for_jtbc,
-                score_threshold=config.score_threshold)
-    else:
-        raise Exception(" [!] find_related_texts for `{}` is not defined". \
-                format(config.recognition_path))
+    align_text = partial(align_text_fn,
+            score_threshold=config.score_threshold)
 
     results = {}
     data = load_json(config.recognition_path)
