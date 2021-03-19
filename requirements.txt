@@ -56,7 +56,7 @@ iso8601==0.1.12
 itsdangerous==0.24
 jamo==0.4.0
 jedi==0.11.0
-Jinja2==2.9.6
+Jinja2==2.11.3
 joblib==0.11
 librosa==0.5.1
 llvmlite==0.20.0
