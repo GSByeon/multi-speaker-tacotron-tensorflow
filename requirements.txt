@@ -12,7 +12,7 @@ decorator==4.1.2
 dill==0.2.7.1
 ffprobe==0.5
 Flask==0.12.2
-Flask-Cors==3.0.3
+Flask-Cors==3.0.9
 future==0.16.0
 gapic-google-cloud-datastore-v1==0.15.3
 gapic-google-cloud-error-reporting-v1beta1==0.15.3
