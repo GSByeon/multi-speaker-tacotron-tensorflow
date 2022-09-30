@@ -57,7 +57,7 @@ itsdangerous==0.24
 jamo==0.4.0
 jedi==0.11.0
 Jinja2==2.9.6
-joblib==0.11
+joblib==1.2.0
 librosa==0.5.1
 llvmlite==0.20.0
 m3u8==0.3.3
